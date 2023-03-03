@@ -7,16 +7,16 @@ const loadData = () => {
     const URL = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch(URL)
         .then(res => res.json())
-        .then(data => showData(data.data.tools));
-    // .then(data => console.log(data.data.tools));
-
-
+        .then(data => {
+            showData(data.data.tools.slice(0, 6))
+        });
 }
 
 const showData = (cards) => {
-    // console.log(cards[0].image);    
-    cards.slice(0, 6).forEach((card) => {
-        const cardsContainer = document.getElementById('cards-container');
+    // console.log(cards[0].image);
+    const cardsContainer = document.getElementById('cards-container'); 
+    cardsContainer.innerHTML = '';   
+    cards.forEach((card) => {        
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
         <div class="card card-compact w-96 h-96 bg-base-100 shadow-xl p-2">
@@ -50,15 +50,41 @@ const showData = (cards) => {
 --------------------------
 */
 
-const showDetails = (id)=>{
+const showDetails = (id) => {
     // console.log(id)
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(URL)
-    .then (res => res.json())
-    .then (data => console.log(data))
+        .then(res => res.json())
+        .then(data => console.log(data))
     // console.log(URL);
 };
 
+/* 
+------------------------------
+        Show All Cards
+------------------------------
+*/
+
+const showAllData = () => {
+    const URL = 'https://openapi.programming-hero.com/api/ai/tools';
+    fetch(URL)
+        .then(res => res.json())
+        .then(data => {
+            showData(data.data.tools)
+        });
+}
+
+
+/* 
+const showAll = document.getElementById('show-all');
+
+    if (dataLimit && phones.length > 10) {
+        phones = phones.slice(0, 10);
+        showAll.classList.remove('d-none');
+    }
+    else {
+        showAll.classList.add('d-none')
+    } */
 
 loadData();
 
