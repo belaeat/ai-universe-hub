@@ -15,7 +15,7 @@ const loadData = () => {
 
 const showData = (cards) => {
     // console.log(cards[0].image);    
-    cards.forEach((card) => {
+    cards.slice(0, 6).forEach((card) => {
         const cardsContainer = document.getElementById('cards-container');
         const cardDiv = document.createElement('div');
         cardDiv.innerHTML = `
@@ -34,7 +34,7 @@ const showData = (cards) => {
                             <h3 class="text-xl font-bold mb-2">${card.name}</h3>
                             <p>${card.published_in}</p>
                         </div>
-                        <button id="details-btn"><i class="fa-solid fa-arrow-right text-xl text-red-500"></i></button>
+                        <button onclick=showDetails('${card.id}') id="details-btn"><i class="fa-solid fa-arrow-right text-xl text-red-500"></i></button>
                     </div>
                 </div>
             </div>
@@ -43,10 +43,25 @@ const showData = (cards) => {
     });
 };
 
+
+/* 
+--------------------------
+        Show Details
+--------------------------
+*/
+
+const showDetails = (id)=>{
+    // console.log(id)
+    const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    fetch(URL)
+    .then (res => res.json())
+    .then (data => console.log(data))
+    // console.log(URL);
+};
+
+
 loadData();
 
 /* 
-<li class="my-2">1. Natural Language Processing</li>
-                            <li class="my-2">2. Contectual understanding</li>
-                            <li class="my-2">3. Text generation</li>
+https://openapi.programming-hero.com/api/ai/tool/${id}
 */
