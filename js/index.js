@@ -41,15 +41,8 @@ const showData = (cards) => {
                         <h3 class="text-xl font-bold mb-2">${card.name}</h3>
                         <p>${card.published_in}</p>
                     </div>
-                    <label for="my-modal-3"><i class="fa-solid fa-arrow-right text-xl text-red-500"></i></label>
-                    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-                    <div class="modal">
-                        <div class="modal-box relative">
-                            <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                                <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
-                                <p class="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-                        </div>
-                    </div>
+                    <label onclick="showDetails('${card.id}')" for="my-modal-3"><i class="fa-solid fa-arrow-right text-xl text-red-500"></i></label>
+                    
                 </div>
             </div>
         </div>
@@ -80,7 +73,38 @@ const showDetails = (id) => {
 */
 
 const showCardsData = (modal) => {
-
+    console.log(modal);
+    const modalContainer = document.getElementById('modal-info');
+    // modalContainer.innerHTML = '';
+    const modalDiv = document.createElement('div');
+    modalDiv.classList.add('modal');
+    modalDiv.innerHTML = `    
+        <div class="modal-box relative">
+            <label for="my-modal-3" class="btn btn-sm btn-circle bg-red-500 outline-none absolute right-2 top-2">✕</label>
+            <div class="flex">
+                <div class="bg-red-50 rounded-xl p-6">
+                    <h3 class="font-bold text-2xl">${modal.description}</h3>
+                    <div class="flex py-8 gap-4 justify-between">
+                        <div class="text-center text-xl font-semibold text-green-500 p-4 py-6 shadow-xl rounded-xl bg-white">
+                            <p>${modal.pricing[0] ? modal.pricing[0].price : 'Free of Cost'}</p>
+                            <p>${modal.pricing[0].plan}</p>
+                        </div>
+                        <div class="text-center text-xl font-semibold text-amber-500 p-4 py-6 shadow-xl rounded-xl bg-white">
+                            <p>${modal.pricing[1] ? modal.pricing[1].price : 'Free of Cost'}</p>
+                            <p>${modal.pricing[1].plan}</p>
+                        </div>
+                        <div class="text-center text-xl font-semibold text-red-500 p-4 py-6 shadow-xl rounded-xl bg-white">
+                            <p>${modal.pricing[2] ? modal.pricing[2].price : 'Free of Cost'}</p>
+                            <p>${modal.pricing[2].plan}</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+        </div>    
+    `;
+    modalContainer.appendChild(modalDiv);
 }
 
 
