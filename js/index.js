@@ -1,7 +1,7 @@
 /* 
---------------------------
+----------------------------
         Cards Loading
---------------------------
+----------------------------
 */
 
 const loadData = () => {
@@ -20,7 +20,7 @@ const loadData = () => {
 */
 
 const showData = (cards) => {
-    // console.log(cards[0].image);
+    console.log(cards[0].published_in);
     const cardsContainer = document.getElementById('cards-container');
     cardsContainer.innerHTML = '';
     cards.forEach((card) => {
@@ -112,10 +112,10 @@ const showDetails = (id) => {
 */
 
 const showCardsData = (modal) => {
-    // document.getElementById('modal-info').innerHTML = '';
-    console.log(modal);
+    // console.log(modal);
     const modalContainer = document.getElementById('modal-info');
 
+    //modalContainer.innerHTML = '';
     const modalDiv = document.createElement('div');
     modalDiv.classList.add('modal');
     modalDiv.innerHTML = `    
@@ -177,16 +177,6 @@ const showCardsData = (modal) => {
     `;
     modalContainer.appendChild(modalDiv);
 }
-
-
-
-
-
-/* const showAllData = () => {
-    toggleSpinner(true);
-    
-}
- */
 
 
 loadData();
