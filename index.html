@@ -25,16 +25,33 @@
 
     <!-- Main section here -->
     <main>
-        <section id="cards-container" class="container mx-auto my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 grid-cols-3">
-            
+        <!-- Cards here -->
+        <section id="cards-container"
+            class="container mx-auto my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
         </section>
+
+        <!-- Show all button -->
         <div class="text-center">
-            <button onclick="showAllData()" id="show-all" class="bg-red-500 rounded-2xl font-semibold p-5 text-white">Show All</button>
+            <button onclick="showAllData()" id="show-all"
+                class="bg-red-500 rounded-2xl font-semibold p-5 text-white">Show All</button>
         </div>
 
+        <!-- Spinner -->
+        <section id="loader" class="">
+            <button type="button" class="">
+                <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                  <!-- ... -->
+                </svg>
+              </button>
+        </section>
+        
+
+
+        <!-- Modal content -->
         <div id="modal-info" class="flex">
             <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-        </div>       
+        </div>
 
     </main>
 

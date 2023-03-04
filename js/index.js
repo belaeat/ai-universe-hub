@@ -39,7 +39,7 @@ const showData = (cards) => {
                 <div class="flex items-center justify-between">
                     <div>
                         <h3 class="text-xl font-bold mb-2">${card.name}</h3>
-                        <p>${card.published_in}</p>
+                        <p><i class="fa-solid fa-calendar-days"></i> ${card.published_in}</p>
                     </div>
                     <label onclick="showDetails('${card.id}')" for="my-modal-3"><i class="fa-solid fa-arrow-right text-xl text-red-500"></i></label>
                     
@@ -53,6 +53,15 @@ const showData = (cards) => {
 
 
 /* 
+------------------------------
+           Spinner
+------------------------------
+*/
+
+
+
+
+/* 
 ------------------------------------
         Show Details (Modal)
 ------------------------------------
@@ -63,7 +72,7 @@ const showDetails = (id) => {
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(URL)
         .then(res => res.json())
-        .then(data => showCardsData(data.data))
+        .then(data => showCardsData(data.data));
 };
 
 /* 
@@ -78,71 +87,72 @@ const showCardsData = (modal) => {
     const modalDiv = document.createElement('div');
     modalDiv.classList.add('modal');
     modalDiv.innerHTML = `    
-        <div class="modal-box relative">
+        <div class="modal-box container w-[70%] relative">
             <label for="my-modal-3" class="btn btn-sm btn-circle bg-red-500 outline-none absolute right-2 top-2">✕</label>
             <div class="flex gap-4 items-center">
                 <div class="bg-red-50 rounded-xl p-6">
                     <h3 class="font-bold text-xl">${modal.description}</h3>
                     <div class="flex py-8 gap-4 justify-between">
                         <div class="text-center text-xl font-bold text-green-500 p-4 py-6 shadow-xl rounded-xl bg-white">
-                            <p>${modal.pricing[0] ? modal.pricing[0].price : 'Free of Cost'}</p>
-                            <p>${modal.pricing[0].plan}</p>
+                            <p>${modal.pricing ? modal.pricing[0].price : 'Free of Cost'}</p>
+                            <p>${modal.pricing ? modal.pricing[0].plan :'Free of Cost'}</p>
                         </div>
                         <div class="text-center text-xl font-bold text-amber-500 p-4 py-6 shadow-xl rounded-xl bg-white">
-                            <p>${modal.pricing[1] ? modal.pricing[1].price : 'Free of Cost'}</p>
-                            <p>${modal.pricing[1].plan}</p>
+                            <p>${modal.pricing ? modal.pricing[1].price : 'Free of Cost'}</p>
+                            <p>${modal.pricing ? modal.pricing[1].plan : 'Free of Cost'}</p>
                         </div>
                         <div class="text-center text-xl font-bold text-red-500 p-4 py-6 shadow-xl rounded-xl bg-white">
-                            <p>${modal.pricing[2] ? modal.pricing[2].price : 'Free of Cost'}</p>
-                            <p>${modal.pricing[2].plan}</p>
+                            <p>${modal.pricing ? modal.pricing[2].price : 'Free of Cost'}</p>
+                            <p>${modal.pricing ? modal.pricing[2].plan : 'Free of Cost'}</p>
                         </div>
                     </div>
                     <div class="flex justify-between">
                         <div>
                             <h3 class="text-2xl font-bold">Features<h3>
                             <ul>
-                                <li>${modal.features[1].feature_name}</li>
-                                <li>${modal.features[2].feature_name}</li>
-                                <li>${modal.features[3].feature_name}</li>
+                                <li>${modal.features ? modal.features[1].feature_name :''}</li>
+                                <li>${modal.features ? modal.features[2].feature_name :''}</li>
+                                <li>${modal.features ? modal.features[3].feature_name :''}</li>
                             </ul>
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold">Integrations<h3>
                             <ul class="mt-2">
-                                <li>${modal.integrations[0]}</li>
-                                <li>${modal.integrations[1]}</li>
-                                <li>${modal.integrations[2]}</li>
+                                <li>${modal.integrations ? modal.integrations[0] : 'No Data Found'}</li>
+                                <li>${modal.integrations ? modal.integrations[1] : 'No Data Found'}</li>
+                                <li>${modal.integrations ? modal.integrations[2] : 'No Data Found'}</li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <div class="card w-96 bg-base-100 shadow-xl">
+                    <div class="card bg-base-100 shadow-xl">
                         <figure class="p-4">
                         <img src="${modal.image_link[0]}" alt="" class="rounded-xl"/>
                         </figure>
                         <div class="card-body items-center text-center">
-                            <h2 class="card-title font-bold">${modal.input_output_examples[0].input}</h2>
-                            <p>${modal.input_output_examples[0].output}</p>
+                            <h2 class="card-title font-bold">${modal.input_output_examples ? modal.input_output_examples[0].input : 'Can you give any example?'}</h2>
+                            <p>${modal.input_output_examples ? modal.input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
+                        </div>
+                        <div class="absolute right-2">
+                            <p class="font-semibold bg-red-500 text-white px-3 rounded-xl">${modal.accuracy ? modal.accuracy.score*100 : 'Not Found'} accuracy</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div> 
+        
     `;
     modalContainer.appendChild(modalDiv);
 }
-/* 
-    <div class="absolute right-2 top-2">
-         ${modal.accuracy.score} accuracy
-    </div>
-*/
+
 
 /* 
 ------------------------------
         Show All Cards
 ------------------------------
 */
+
 
 const showAllData = () => {
     const URL = 'https://openapi.programming-hero.com/api/ai/tools';
