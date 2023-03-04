@@ -75,7 +75,6 @@ const showDetails = (id) => {
 const showCardsData = (modal) => {
     console.log(modal);
     const modalContainer = document.getElementById('modal-info');
-    // modalContainer.innerHTML = '';
     const modalDiv = document.createElement('div');
     modalDiv.classList.add('modal');
     modalDiv.innerHTML = `    
@@ -85,17 +84,35 @@ const showCardsData = (modal) => {
                 <div class="bg-red-50 rounded-xl p-6">
                     <h3 class="font-bold text-2xl">${modal.description}</h3>
                     <div class="flex py-8 gap-4 justify-between">
-                        <div class="text-center text-xl font-semibold text-green-500 p-4 py-6 shadow-xl rounded-xl bg-white">
+                        <div class="text-center text-xl font-bold text-green-500 p-4 py-6 shadow-xl rounded-xl bg-white">
                             <p>${modal.pricing[0] ? modal.pricing[0].price : 'Free of Cost'}</p>
                             <p>${modal.pricing[0].plan}</p>
                         </div>
-                        <div class="text-center text-xl font-semibold text-amber-500 p-4 py-6 shadow-xl rounded-xl bg-white">
+                        <div class="text-center text-xl font-bold text-amber-500 p-4 py-6 shadow-xl rounded-xl bg-white">
                             <p>${modal.pricing[1] ? modal.pricing[1].price : 'Free of Cost'}</p>
                             <p>${modal.pricing[1].plan}</p>
                         </div>
-                        <div class="text-center text-xl font-semibold text-red-500 p-4 py-6 shadow-xl rounded-xl bg-white">
+                        <div class="text-center text-xl font-bold text-red-500 p-4 py-6 shadow-xl rounded-xl bg-white">
                             <p>${modal.pricing[2] ? modal.pricing[2].price : 'Free of Cost'}</p>
                             <p>${modal.pricing[2].plan}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold">Features<h3>
+                            <ul>
+                                <li>${modal.features[1].feature_name}</li>
+                                <li>${modal.features[2].feature_name}</li>
+                                <li>${modal.features[3].feature_name}</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Integrations<h3>
+                            <ul class="mt-2">
+                                <li>${modal.integrations[0]}</li>
+                                <li>${modal.integrations[1]}</li>
+                                <li>${modal.integrations[2]}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
