@@ -79,6 +79,8 @@ document.getElementById('show-all').addEventListener('click', function(){
 ------------------------------
 */
 
+// Spinner is working fast. To visualize this spin please go to network tab from google chrome and set speed to slow 3G. 
+
 const toggleSpinner = isLoading  =>{
     const loaderSection = document.getElementById('loader');
     if(isLoading){
