@@ -80,9 +80,9 @@ const showCardsData = (modal) => {
     modalDiv.innerHTML = `    
         <div class="modal-box relative">
             <label for="my-modal-3" class="btn btn-sm btn-circle bg-red-500 outline-none absolute right-2 top-2">✕</label>
-            <div class="flex">
+            <div class="flex gap-4 items-center">
                 <div class="bg-red-50 rounded-xl p-6">
-                    <h3 class="font-bold text-2xl">${modal.description}</h3>
+                    <h3 class="font-bold text-xl">${modal.description}</h3>
                     <div class="flex py-8 gap-4 justify-between">
                         <div class="text-center text-xl font-bold text-green-500 p-4 py-6 shadow-xl rounded-xl bg-white">
                             <p>${modal.pricing[0] ? modal.pricing[0].price : 'Free of Cost'}</p>
@@ -117,13 +117,26 @@ const showCardsData = (modal) => {
                     </div>
                 </div>
                 <div>
+                    <div class="card w-96 bg-base-100 shadow-xl">
+                        <figure class="p-4">
+                        <img src="${modal.image_link[0]}" alt="" class="rounded-xl"/>
+                        </figure>
+                        <div class="card-body items-center text-center">
+                            <h2 class="card-title font-bold">${modal.input_output_examples[0].input}</h2>
+                            <p>${modal.input_output_examples[0].output}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>    
     `;
     modalContainer.appendChild(modalDiv);
 }
-
+/* 
+    <div class="absolute right-2 top-2">
+         ${modal.accuracy.score} accuracy
+    </div>
+*/
 
 /* 
 ------------------------------
