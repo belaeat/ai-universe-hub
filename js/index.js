@@ -56,6 +56,25 @@ const showData = (cards) => {
 
 /* 
 ------------------------------
+        Show All Cards
+------------------------------
+*/
+
+document.getElementById('show-all').addEventListener('click', function(){
+
+    // start loading
+    toggleSpinner(true);
+
+    const URL = 'https://openapi.programming-hero.com/api/ai/tools';
+    fetch(URL)
+        .then(res => res.json())
+        .then(data => {
+            showData(data.data.tools)
+        });
+})
+
+/* 
+------------------------------
            Spinner
 ------------------------------
 */
@@ -63,10 +82,10 @@ const showData = (cards) => {
 const toggleSpinner = isLoading  =>{
     const loaderSection = document.getElementById('loader');
     if(isLoading){
-        loaderSection.classList.remove(hidden);
+        loaderSection.classList.remove('hidden');
     }
     else{
-        loaderSection.classList.add
+        loaderSection.classList.add('hidden')
     }
 }
 
@@ -157,23 +176,15 @@ const showCardsData = (modal) => {
     modalContainer.appendChild(modalDiv);
 }
 
-/* 
-------------------------------
-        Show All Cards
-------------------------------
-*/
 
 
-const showAllData = () => {
+
+
+/* const showAllData = () => {
     toggleSpinner(true);
-    const URL = 'https://openapi.programming-hero.com/api/ai/tools';
-    fetch(URL)
-        .then(res => res.json())
-        .then(data => {
-            showData(data.data.tools)
-        });
+    
 }
-
+ */
 
 
 loadData();
