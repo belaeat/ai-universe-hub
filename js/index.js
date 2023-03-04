@@ -33,7 +33,7 @@ const showData = (cards) => {
                     <h3 class="text-xl font-bold mb-2">Features</h3>
                     <p>1. ${card.features[0]}</p>
                     <p>2. ${card.features[1]}</p>
-                    <p>3. ${card.features[2]}</p>
+                    <p>3. ${card.features ? card.features[2] : 'No Data Found'}</p>
                 </div>
                 <hr>
                 <div class="flex items-center justify-between">
@@ -49,6 +49,8 @@ const showData = (cards) => {
         `;
         cardsContainer.appendChild(cardDiv);
     });
+
+    toggleSpinner(false);
 };
 
 
@@ -58,7 +60,15 @@ const showData = (cards) => {
 ------------------------------
 */
 
-
+const toggleSpinner = isLoading  =>{
+    const loaderSection = document.getElementById('loader');
+    if(isLoading){
+        loaderSection.classList.remove(hidden);
+    }
+    else{
+        loaderSection.classList.add
+    }
+}
 
 
 /* 
@@ -68,7 +78,6 @@ const showData = (cards) => {
 */
 
 const showDetails = (id) => {
-
     const URL = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(URL)
         .then(res => res.json())
@@ -82,17 +91,19 @@ const showDetails = (id) => {
 */
 
 const showCardsData = (modal) => {
+    // document.getElementById('modal-info').innerHTML = '';
     console.log(modal);
     const modalContainer = document.getElementById('modal-info');
+
     const modalDiv = document.createElement('div');
     modalDiv.classList.add('modal');
     modalDiv.innerHTML = `    
         <div class="modal-box container w-[70%] relative">
-            <label for="my-modal-3" class="btn btn-sm btn-circle bg-red-500 outline-none absolute right-2 top-2">✕</label>
-            <div class="flex gap-4 items-center">
+            <label id="modal-close" for="my-modal-3" class="btn btn-sm btn-circle bg-red-500 outline-none absolute right-2 top-2">✕</label>
+            <div class="flex flex-col md:flex-row lg:flex-row justify-center gap-4 items-center ">
                 <div class="bg-red-50 rounded-xl p-6">
                     <h3 class="font-bold text-xl">${modal.description}</h3>
-                    <div class="flex py-8 gap-4 justify-between">
+                    <div class="flex flex-col md:flex-row lg:flex-row justify-center py-4 gap-4 justify-between">
                         <div class="text-center text-xl font-bold text-green-500 p-4 py-6 shadow-xl rounded-xl bg-white">
                             <p>${modal.pricing ? modal.pricing[0].price : 'Free of Cost'}</p>
                             <p>${modal.pricing ? modal.pricing[0].plan :'Free of Cost'}</p>
@@ -106,7 +117,7 @@ const showCardsData = (modal) => {
                             <p>${modal.pricing ? modal.pricing[2].plan : 'Free of Cost'}</p>
                         </div>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex flex-col md:flex-row lg:flex-row justify-center justify-between">
                         <div>
                             <h3 class="text-2xl font-bold">Features<h3>
                             <ul>
@@ -119,8 +130,8 @@ const showCardsData = (modal) => {
                             <h3 class="text-2xl font-bold">Integrations<h3>
                             <ul class="mt-2">
                                 <li>${modal.integrations ? modal.integrations[0] : 'No Data Found'}</li>
-                                <li>${modal.integrations ? modal.integrations[1] : 'No Data Found'}</li>
-                                <li>${modal.integrations ? modal.integrations[2] : 'No Data Found'}</li>
+                                <li class="${modal.integrations ? 'block' : 'hidden'}">${modal.integrations ? modal.integrations[1] : 'No Data Found'}</li>
+                                <li class="${modal.integrations ? 'block' : 'hidden'}">${modal.integrations ? modal.integrations[2] : 'No Data Found'}</li>
                             </ul>
                         </div>
                     </div>
@@ -134,8 +145,8 @@ const showCardsData = (modal) => {
                             <h2 class="card-title font-bold">${modal.input_output_examples ? modal.input_output_examples[0].input : 'Can you give any example?'}</h2>
                             <p>${modal.input_output_examples ? modal.input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
                         </div>
-                        <div class="absolute right-2">
-                            <p class="font-semibold bg-red-500 text-white px-3 rounded-xl">${modal.accuracy ? modal.accuracy.score*100 : 'Not Found'} accuracy</p>
+                        <div class="absolute right-2 ">
+                            <button class="font-semibold bg-red-500 text-white px-3 rounded-md ${modal.accuracy.score ? 'block' : 'hidden'}">${modal.accuracy.score*100}% accuracy</button>
                         </div>
                     </div>
                 </div>
@@ -146,7 +157,6 @@ const showCardsData = (modal) => {
     modalContainer.appendChild(modalDiv);
 }
 
-
 /* 
 ------------------------------
         Show All Cards
@@ -155,6 +165,7 @@ const showCardsData = (modal) => {
 
 
 const showAllData = () => {
+    toggleSpinner(true);
     const URL = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch(URL)
         .then(res => res.json())
